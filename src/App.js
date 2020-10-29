@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React,{useState} from 'react';
+import Header from "./Components/Header";
+import GlobalStyles from "./Global";
+import Logo from "./Components/Logo";
+import styled,{css} from "styled-components";
+
+const Wrapper = styled.div`
+  width: 100%;
+  background-image:url(bgblur.png);
+  transition: 1s;
+  height: 1000px;
+  ${props => props.bluertime ? "" : "background-image:url(bg.png)"}
+
+`;
 
 function App() {
+  const [bluetime, setblurtime] = useState(true);
+  setTimeout(() => {
+    setblurtime(false);
+  }, 1000)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Wrapper bluertime={bluetime}>
+      <GlobalStyles />
+      {bluetime ? "" : <Header />}
+      <Logo />
+    </Wrapper>
   );
 }
 
